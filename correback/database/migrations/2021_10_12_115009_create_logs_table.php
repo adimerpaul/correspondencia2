@@ -21,11 +21,12 @@ class CreateLogsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('user_id2');
             $table->foreign('user_id2')->references('id')->on('users');
-            $table->string('remitente');
-            $table->string('destinatario');
-            $table->string('estado');
-            $table->string('accion');
+            $table->string('remitente')->nullable()->default('');
+            $table->string('destinatario')->nullable()->default('');
+            $table->string('estado')->default('EN PROCESO');
+            $table->string('accion')->nullable()->default('');;
             $table->date('fecha');
+            $table->time('hora');
             $table->unsignedBigInteger('unit_id');
             $table->foreign('unit_id')->references('id')->on('units');
             $table->timestamps();
