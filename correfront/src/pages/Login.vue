@@ -137,8 +137,8 @@ export default {
       rule:[
         val => (val && val.length > 0) || 'Porfavor ingresar dato'
       ],
-      email:'',
-      password:'',
+      email:'admin@test.com',
+      password:'admin',
       tab:'login',
       user:{},
       isPwd:true,
@@ -146,6 +146,10 @@ export default {
     }
   },
   created() {
+    if (this.$store.getters["login/isLoggedIn"]){
+      this.$router.push('/recepcion')
+    }
+
     this.$q.loading.show()
     this.$axios.get(process.env.API+'/unit').then(res=>{
       this.units=res.data

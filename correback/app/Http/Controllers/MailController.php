@@ -12,9 +12,9 @@ class MailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return Mail::where('user_id',$request->user()->id)->get();
     }
 
     /**
@@ -35,7 +35,7 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mail::create($request->all());
     }
 
     /**
@@ -69,7 +69,7 @@ class MailController extends Controller
      */
     public function update(Request $request, Mail $mail)
     {
-        //
+        $mail->update($request->all());
     }
 
     /**
@@ -80,6 +80,6 @@ class MailController extends Controller
      */
     public function destroy(Mail $mail)
     {
-        //
+        $mail->delete();
     }
 }

@@ -16,12 +16,12 @@ class CreateMailsTable extends Migration
         Schema::create('mails', function (Blueprint $table) {
             $table->id();
             $table->string("codigo");
-            $table->string("tipo");
-            $table->string("tipo")->default('ARCHIVO');
+            $table->string("tipo")->default('INTERNO');
+            $table->string("tipo2")->default('ARCHIVO');
             $table->string("ref");
             $table->date("fecha");
             $table->date("fechacarta");
-            $table->string("estado");
+            $table->string("estado")->default('EN PROCESO');
             $table->string("folio");
             $table->string("archivo");
             $table->string("codinterno")->nullable();
