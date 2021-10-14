@@ -244,4 +244,12 @@ font-size: 14px;
         return $mail->delete();
         
     }
+
+    public function archivar(Request $request)
+    {
+        $mail=Mail::find($request->id);
+        $mail->estado='ARCHIVADO';
+        return $mail->save();
+        
+    }
 }

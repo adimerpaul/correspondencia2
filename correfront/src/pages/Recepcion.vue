@@ -100,13 +100,13 @@
 <!--            <q-badge color="amber">-->
 <!--              {{ props.row.opciones }}-->
 <!--            </q-badge>-->
-            <q-btn-group >
+            <q-btn-group v-if="props.row.estado!='ARCHIVADO'">
               <q-btn type="a"  target="__blank" dense :href="url+'/mail/'+props.row.id" color="primary" label="Imprimir" icon="timeline" size="xs" />
 <!--              <q-btn dense@click= color="teal" label="Imprimir ticket" icon="visibility" size="xs" />-->
               <q-btn dense @click="editar(props)" color="teal" label="Editar" icon="edit" size="xs" />
               <q-btn dense @click="remitir" color="positive" label="Remitir" icon="code" size="xs" />
               <q-btn dense @click="anular(props.row)" color="negative" label="Anular" icon="delete" size="xs" />
-              <q-btn dense @click="archivar" color="accent" label="Archivar" icon="list" size="xs" />
+              <q-btn dense @click="archivar(props)" color="accent" label="Archivar" icon="list" size="xs" />
               <q-btn dense @click="archivo" color="amber" label="Archivo" icon="upload" size="xs" />
             </q-btn-group>
           </q-td>
@@ -175,8 +175,19 @@ export default {
   },
   methods:{
     remitir(){},
-    archivar(){},
-    archivo(){},
+    archivar(props){
+      this.$axios.post(process.env.API+'/archivar',props.row).then(res=>{
+        this.misdatos();
+        this.$q.notify({
+           message: 'Correo Finalizado',
+          caption: 'Archivado',
+          color: 'green'
+        });
+      })
+    },
+    archivo(props){
+
+    },
     editar(props){
       console.log(props.row);
       this.dato=props.row;

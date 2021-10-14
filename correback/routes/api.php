@@ -30,6 +30,7 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::resource('/mail',\App\Http\Controllers\MailController::class);
     Route::post('/updatemail',[\App\Http\Controllers\MailController::class,'updatemail']);
     Route::post('/eliminar/{id}',[\App\Http\Controllers\MailController::class,'eliminar']);
+    Route::post('/archivar',[\App\Http\Controllers\MailController::class,'archivar']);
     Route::post('/usuarios',[\App\Http\Controllers\UserController::class,'usuarios']);
     Route::resource('/permiso',\App\Http\Controllers\PermisoController::class);
 });
