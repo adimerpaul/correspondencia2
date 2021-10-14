@@ -11,7 +11,8 @@ export function auth_success(state, data){
   state.user = data.user
   state.boolusuarios=data.user.permisos.find(p=>p.id===1)!=undefined
   state.boolrecepcion=data.user.permisos.find(p=>p.id===2)!=undefined
-  state.boolseguimiento=data.user.permisos.find(p=>p.id===3)!=undefined
+  state.booldesignacion=data.user.permisos.find(p=>p.id===3)!=undefined
+  state.boolseguimiento=data.user.permisos.find(p=>p.id===4)!=undefined
   // state.inventario=data.user.permisos.find(p=>p.id===4)!=undefined
   // state.ventadetalle=data.user.permisos.find(p=>p.id===5)!=undefined
   // state.historialventadetalle=data.user.permisos.find(p=>p.id===6)!=undefined
@@ -34,6 +35,7 @@ export function salir(state){
   state.boolrecepcion=false
   state.boolseguimiento=false
   state.user={unit:{}}
+  state.booldesignacion=false
   // state.ventadetalle=false
   // state.historialventadetalle=false
   // state.ventalocal=false

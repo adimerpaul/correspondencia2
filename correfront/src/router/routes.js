@@ -2,6 +2,7 @@ import Login from "pages/Login";
 import Recepcion from "pages/Recepcion";
 import User from "pages/User";
 import Seguimiento from "pages/Seguimiento";
+import Asignacion from "pages/Asignacion";
 
 const routes = [
   {
@@ -12,6 +13,7 @@ const routes = [
       { path: '/recepcion', component: Recepcion,meta: {requiresAuth: true,} },
       { path: '/user', component: User,meta: {requiresAuth: true,} },
       { path: '/seguimiento', component: Seguimiento,meta: {requiresAuth: true,} },
+      { path: '/asiganacion', component: Asignacion,meta: {requiresAuth: true,} },
     ]
   },
 

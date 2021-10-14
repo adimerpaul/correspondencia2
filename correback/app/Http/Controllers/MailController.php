@@ -91,23 +91,97 @@ class MailController extends Controller
 padding: 0px;
 margin: 0px;
 border: 0px;
-font-size: 13px;
+font-size: 14px;
     font-family: Elegance, sans-serif;
 }
 </style>
 <table style="width: 100%">
 <tr>
-    <td style="width: 50%"></td>
-    <td>
-        <table style="width: 100%;padding-top: 20px;border: 1px solid black">
+    <td style="width: 50%;"></td>
+    <td style="padding: 25px">
+        <table style="width: 100%;">
         <tr><td align="center" style="font-weight: bold;font-size: 17px">GOBIERNO AUTÓNOMO MUNICIPAL DE ORURO</td></tr>
         </table>
-        <table style="width: 100%;padding-top: 20px;border: 1px solid black">
+        <table style="width: 100%;padding-top: 15px">
         <tr>
-            <td style="width: 33%" align="center;font">HOJA DE TRAMITE</td>
-            <td style="width: 33%" align="right">Registro No.:</td>
-            <td style="width: 33%" align="center">______________________</td>
+            <td style="width: 34%;font-weight:bold;font-size: 30px" align="center">HOJA DE TRAMITE</td>
+            <td style="width: 66%">
+            <table style="width: 100%" >
+                <tr>
+                <td style="width: 50%;font-weight:bold;font-size: 15px" align="right">Registro No.: </td>
+                <td style="border-bottom: 1px solid #6b7280" align="center">'.$mail->codinterno.'</td>
+                </tr>
+                <tr>
+                <td style="width: 50%;font-weight:bold;font-size: 15px" align="right">No. Hojas: </td>
+                <td style="border-bottom: 1px solid #6b7280" align="center">'.$mail->folio.'</td>
+                </tr>
+                <tr>
+                <td style="width: 50%;font-weight:bold;font-size: 15px" align="right"> Fecha de Ingreso: </td>
+                <td style="border-bottom: 1px solid #6b7280" align="center">'.$mail->fecha.'</td>
+                </tr>
+                <tr>
+                <td style="width: 50%;font-weight:bold;font-size: 15px" align="right">Fecha de Salida: </td>
+                <td style="border-bottom: 1px solid #6b7280" align="center"> </td>
+                </tr>
+            </table>
+            </td>
         </tr>
+        </table>
+        <table style="width: 100%;padding-top: 5px">
+        <tr>
+            <td style="width: 17%;font-weight:bold">Procedencia:</td>
+            <td style="width: 83%;border-bottom: 1px solid #6b7280" >'.$mail->remitente.'</td>
+        </tr>
+        <tr>
+            <td style="width: 17%;font-weight:bold">Referencia:</td>
+            <td style="width: 83%;border-bottom: 1px solid #6b7280" >'.$mail->ref.'</td>
+        </tr>
+        </table>
+        <table style="width: 100%;border: 1px solid black;border-collapse: collapse">
+        <tr >
+        <th style="width: 40%">DESTINO</th><th style="width: 5%">DE</th><th style="width: 5%">A</th><th style="width: 30%">INSTRUCCIONES</th><th style="width: 10%"></th>
+        </tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Stria. Mcpal de Econ. y Hacienda</td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"> Urgente</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Dirección de Trib. y Recaud. </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Informe en el día</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Dirección del Tesoro Municipal </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Reúna antecedentes</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Bienes y servicios </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Remita antecedentes</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Dirección Desarr. Econ. Local </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Instruya su ejecución</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Defensa del Consumidor </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Archive</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Mercados </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Conteste Carta</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Actividades Económicas </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Verificar y procesar</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Espectáculos Públ. y Publ. Urbana </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Efectúe liquidación</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Ventanilla Única </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Remitase a la MAE</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Valores Municipales </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Informe</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Asistente </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px">Su Atención</td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px">Secretaría</td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;color: white">A </td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td><td style="border: 0.2px solid black;padding-left: 2px"></td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;font-weight: bold" colspan="5">Para:</td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;font-weight: bold" colspan="5">Instrucciones Complementarias:</td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;color: white" colspan="5">A </td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;color: white" colspan="5">A </td></tr>
+        <tr>
+        <td style="border: 0.2px solid black;padding-left: 2px;font-weight: bold" colspan="5">
+        <table style="width: 100%">
+            <tr>
+            <td style=";width: 50%;"></td>
+            <td style="width: 50%;" align="center"> <div style="border-top: 1px solid black;margin-top: 40px">FIRMA Y SELLO</div></td>
+            </tr>
+        </table>
+        Para:
+        </td>
+        </tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;font-weight: bold" colspan="5">Instrucciones Complementarias:</td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;color: white" colspan="5">A </td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;color: white" colspan="5">A </td></tr>
+        <tr><td style="border: 0.2px solid black;padding-left: 2px;font-weight: bold" colspan="5">
+        <table style="width: 100%">
+            <tr>
+            <td style=";width: 50%;"></td>
+            <td style="width: 50%;" align="center"> <div style="border-top: 1px solid black;margin-top: 40px">FIRMA Y SELLO</div></td>
+            </tr>
+        </table>
+        Codigo:'.$mail->codigo.'
+        </td></tr>
         </table>
     </td>
 </tr>

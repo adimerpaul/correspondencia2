@@ -7,6 +7,7 @@ export default function () {
     boolusuarios:false,
     boolrecepcion:false,
     boolseguimiento:false,
+    booldesignacion:false,
     // inventario:false,
     // ventadetalle:false,
     // historialventadetalle:false,

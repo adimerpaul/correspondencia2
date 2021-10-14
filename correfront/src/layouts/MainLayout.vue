@@ -92,7 +92,25 @@
             <q-item-section>
               <q-item-label>Recepcion de archivos</q-item-label>
               <q-item-label caption>
-                Recepcion de archivos
+                Recepciones por unidad
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            v-if="$store.state.login.booldesignacion"
+            clickable
+            to="/asiganacion"
+          >
+            <q-item-section
+              avatar
+            >
+              <q-icon name="code" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>Mis asiganaciones</q-item-label>
+              <q-item-label caption>
+                Mis designaciones
               </q-item-label>
             </q-item-section>
           </q-item>
