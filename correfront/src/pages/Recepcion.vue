@@ -8,7 +8,12 @@
           <div class="col-6 flex flex-center"><q-radio dense v-model="dato.tipo" val="EXTERNO" label="EXTERNO"/></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-input dense autofocus label="Referencia" v-model="dato.ref" outlined/></div>
           <div class="col-sm-6 col-12 q-pa-xs">
-            <q-input dense autofocus label="Remitente" v-model="dato.remitente" outlined/>
+            <q-input @change="cambio" @keyup="cambio" outlined dense label="remitente" list="browsers" name="myBrowser" v-model="remitente" />
+            <datalist id="browsers">
+              <option v-for="r in remitentes" :key="r.id">{{r.remitente}}</option>
+
+            </datalist>
+<!--            <q-input dense autofocus label="Remitente" v-model="dato.remitentes" outlined/>-->
 <!--            <div class="row">-->
 <!--              <div class="col-1 flex flex-center"><q-icon color="primary" name="add_circle" size="xs" /></div>-->
 <!--              <div class="col-11">-->
@@ -39,8 +44,8 @@
 
 <!--            {{remitente}}-->
           </div>
-          <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Cargo" v-model="dato.cargo" outlined/></div>
-          <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Institucion" v-model="dato.institucion" outlined/></div>
+          <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Cargo" v-model="cargo" outlined/></div>
+          <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Institucion" v-model="institucion" outlined/></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Fecha de correspondencia" v-model="dato.fecha" type="date" outlined/></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-select dense label="Folio" v-model="dato.folio" :options="folios" outlined /></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Cod externo" v-model="dato.codexterno" outlined /></div>
@@ -156,11 +161,11 @@ export default {
     for (let i=1;i<=1000;i++){
       this.folios.push(i)
     }
-    // this.$axios.get(process.env.API+'/mail/create').then(res=>{
-    //   // console.log(res.data)
-    //   this.remitentes=res.data
-    //   this.remitentes2=res.data
-    // })
+    this.$axios.get(process.env.API+'/mail/create').then(res=>{
+      console.log(res.data)
+      this.remitentes=res.data
+      this.remitentes2=res.data
+    })
     this.$axios.post(process.env.API+'/usuarios').then(res=>{
       res.data.forEach(r=>{
         // console.log(r)
@@ -174,6 +179,21 @@ export default {
     })
   },
   methods:{
+    cambio(){
+      this.cargo=''
+      this.institucion=''
+      // console.log(this.remitente)
+      this.remitentes.find(r=>{
+        if (r.remitente==this.remitente){
+          // console.log(r)
+          this.cargo=r.cargo
+          this.institucion=r.institucion
+        }else{
+          this.cargo=''
+          this.institucion=''
+        }
+      })
+    },
     remitir(){},
     archivar(props){
       this.$axios.post(process.env.API+'/archivar',props.row).then(res=>{
@@ -330,7 +350,7 @@ export default {
           color:'red',
           icon:'error'
         })
-      }) 
+      })
       }
     }
   }

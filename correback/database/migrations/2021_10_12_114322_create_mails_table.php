@@ -29,9 +29,9 @@ class CreateMailsTable extends Migration
             $table->string("archivo")->nullable()->default('');
             $table->string("codinterno")->nullable();
             $table->string("codexterno")->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('unit_id')->nullable();;
             $table->foreign('unit_id')->references('id')->on('units');
             $table->unsignedBigInteger('mail_id')->nullable()->default(null);
             $table->foreign('mail_id')->references('id')->on('mails');

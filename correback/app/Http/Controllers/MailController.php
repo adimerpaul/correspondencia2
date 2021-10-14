@@ -63,8 +63,8 @@ class MailController extends Controller
 //        $mail->archivo=$request->archivo;
         $mail->codinterno=$codigointerno;
         $mail->codexterno=$request->codexterno;
-        $mail->user_id=$request->user()->id;
-        $mail->unit_id=$request->user()->unit_id;
+//        $mail->user_id=$request->user()->id;
+//        $mail->unit_id=$request->user()->unit_id;
 //        $mail->mail_id=$request->mail_id;
         $mail->save();
     }

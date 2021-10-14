@@ -70,17 +70,17 @@
       </q-table>
       <q-dialog v-model="modalremitir">
         <q-card  style="width: 700px; max-width: 80vw;">
-          <q-card-section>
+          <q-card-section >
             <div class="text-h6"> <q-icon name="code"/> Remitir</div>
           </q-card-section>
           <q-card-section class="q-pt-none">
             <q-form>
               <div class="row">
                 <div class="col-12">
-                  <q-input type="textarea" label="Mi accion"/>
+                  <q-input dense type="textarea" label="Mi accion"/>
                 </div>
                 <div class="col-12">
-                  <q-select label="Destinatario" :options="usuarios"/>
+                  <q-select dense label="Destinatario" :options="usuarios"/>
                 </div>
               </div>
             </q-form>
@@ -107,6 +107,8 @@ export default {
       dato:{tipo:'INTERNO',fecha:date.formatDate(Date.now(),'YYYY-MM-DD'),folio:1},
       folios:[],
       usuarios:[],
+      accion:'',
+      destinatario:'',
       mails:[],
       remitentes:[],
       remitentes2:[],
