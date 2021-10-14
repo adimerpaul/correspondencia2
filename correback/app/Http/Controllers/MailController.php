@@ -231,8 +231,17 @@ font-size: 14px;
      * @param  \App\Models\Mail  $mail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mail $mail)
+    public function destroy($id)
     {
-        $mail->delete();
+        $mail=Mail::find($id);
+        return $mail->delete();
+        
+    }
+
+    public function eliminar($id)
+    {
+        $mail=Mail::find($id);
+        return $mail->delete();
+        
     }
 }

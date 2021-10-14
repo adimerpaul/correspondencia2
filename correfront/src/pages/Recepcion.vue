@@ -105,7 +105,7 @@
 <!--              <q-btn dense@click= color="teal" label="Imprimir ticket" icon="visibility" size="xs" />-->
               <q-btn dense @click="editar(props)" color="teal" label="Editar" icon="edit" size="xs" />
               <q-btn dense @click="remitir" color="positive" label="Remitir" icon="code" size="xs" />
-              <q-btn dense @click="anular" color="negative" label="Anular" icon="delete" size="xs" />
+              <q-btn dense @click="anular(props.row)" color="negative" label="Anular" icon="delete" size="xs" />
               <q-btn dense @click="archivar" color="accent" label="Archivar" icon="list" size="xs" />
               <q-btn dense @click="archivo" color="amber" label="Archivo" icon="upload" size="xs" />
             </q-btn-group>
@@ -174,6 +174,9 @@ export default {
     })
   },
   methods:{
+    remitir(){},
+    archivar(){},
+    archivo(){},
     editar(props){
       console.log(props.row);
       this.dato=props.row;
@@ -273,6 +276,17 @@ export default {
         })
         this.$q.loading.hide()
       })
+    },
+    anular(mail){
+      this.$axios.post(process.env.API+'/eliminar/'+mail.id).then(res=>{
+        this.misdatos();
+        this.$q.notify({
+           message: 'Eliminar',
+          caption: 'registro elimando',
+          color: 'green'
+        });
+        })
+
     },
     guardar(){
       // console.log(this.remitente)
