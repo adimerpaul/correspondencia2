@@ -29,6 +29,8 @@ export default boot(({ app, router, store }) => {
     }).catch(err=>{
       // console.error('aas')
       store.commit('login/salir')
+      localStorage.removeItem('tokencorre')
+
     })
   }
 

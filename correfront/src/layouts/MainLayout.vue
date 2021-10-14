@@ -108,9 +108,9 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>Mis asiganaciones</q-item-label>
+              <q-item-label>Mis asignaciones</q-item-label>
               <q-item-label caption>
-                Mis designaciones
+                Mis asignaciones
               </q-item-label>
             </q-item-section>
           </q-item>

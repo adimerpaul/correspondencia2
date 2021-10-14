@@ -19,6 +19,9 @@ class PermisoUserSeeder extends Seeder
             ['user_id'=>1,'permiso_id'=>2],
             ['user_id'=>1,'permiso_id'=>3],
             ['user_id'=>1,'permiso_id'=>4],
+            ['user_id'=>2,'permiso_id'=>2],
+            ['user_id'=>2,'permiso_id'=>3],
+            ['user_id'=>2,'permiso_id'=>4],
         ]);
     }
 }

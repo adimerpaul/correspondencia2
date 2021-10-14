@@ -33,4 +33,7 @@ class Mail extends Model
     public function mail(){
         return $this->belongsTo(Mail::class);
     }
+    public function logs(){
+        return $this->hasMany(Log::class);
+    }
 }

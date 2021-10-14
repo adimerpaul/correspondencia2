@@ -17,7 +17,8 @@ class MailController extends Controller
      */
     public function index(Request $request)
     {
-        return Mail::where('unit_id',$request->user()->unit_id)->get();
+//        return Mail::where('unit_id',$request->user()->unit_id)->get();
+        return Mail::with('logs')->where('unit_id',$request->user()->unit_id)->get();
     }
 
     /**
@@ -235,14 +236,14 @@ font-size: 14px;
     {
         $mail=Mail::find($id);
         return $mail->delete();
-        
+
     }
 
     public function eliminar($id)
     {
         $mail=Mail::find($id);
         return $mail->delete();
-        
+
     }
 
     public function archivar(Request $request)
@@ -250,6 +251,6 @@ font-size: 14px;
         $mail=Mail::find($request->id);
         $mail->estado='ARCHIVADO';
         return $mail->save();
-        
+
     }
 }
