@@ -241,8 +241,9 @@ font-size: 14px;
 
     public function eliminar($id)
     {
-        $mail=Mail::find($id);
-        return $mail->delete();
+        $mail=Mail::find($request->id);
+        $mail->estado='ANULADO';
+        return $mail->save();
 
     }
 

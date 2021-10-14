@@ -100,7 +100,7 @@
 <!--            <q-badge color="amber">-->
 <!--              {{ props.row.opciones }}-->
 <!--            </q-badge>-->
-            <q-btn-group v-if="props.row.estado!='ARCHIVADO'">
+            <q-btn-group v-if="props.row.estado!='ARCHIVADO' && props.row.estado!='ANULADO'">
               <q-btn type="a"  target="__blank" dense :href="url+'/mail/'+props.row.id" color="primary" label="Imprimir" icon="timeline" size="xs" />
 <!--              <q-btn dense@click= color="teal" label="Imprimir ticket" icon="visibility" size="xs" />-->
               <q-btn dense @click="editar(props)" color="teal" label="Editar" icon="edit" size="xs" />
