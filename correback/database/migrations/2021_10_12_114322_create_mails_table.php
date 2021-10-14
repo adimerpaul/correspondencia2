@@ -19,11 +19,14 @@ class CreateMailsTable extends Migration
             $table->string("tipo")->default('INTERNO');
             $table->string("tipo2")->default('ARCHIVO');
             $table->string("ref");
+            $table->string("remitente");
+            $table->string("cargo");
+            $table->string("institucion");
             $table->date("fecha");
             $table->date("fechacarta");
             $table->string("estado")->default('EN PROCESO');
             $table->string("folio");
-            $table->string("archivo");
+            $table->string("archivo")->nullable()->default('');
             $table->string("codinterno")->nullable();
             $table->string("codexterno")->nullable();
             $table->unsignedBigInteger('user_id');

@@ -13,6 +13,9 @@ class UserController extends Controller
     public function index(){
         return User::with('unit')->with('permisos')->where('id','!=',1)->get();
     }
+    public function usuarios(Request $request){
+        return User::with('unit')->where('id','!=',$request->user()->id)->where('id','!=',1)->orderBy('unit_id')->get();
+    }
     public function login(Request $request){
         if (!Auth::attempt($request->all())){
             return response()->json(['res'=>'No existe el usuario'],400);

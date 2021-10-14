@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login',[\App\Http\Controllers\UserController::class,'login']);
 Route::post('/register',[\App\Http\Controllers\UserController::class,'register']);
 Route::resource('/unit',\App\Http\Controllers\UnitController::class);
-
 Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('/logout',[\App\Http\Controllers\UserController::class,'logout']);
     Route::post('/me',[\App\Http\Controllers\UserController::class,'me']);
@@ -28,5 +27,9 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::put('/updatepermisos/{user}',[\App\Http\Controllers\UserController::class,'updatepermisos']);
 
     Route::resource('/user',\App\Http\Controllers\UserController::class);
+    Route::resource('/mail',\App\Http\Controllers\MailController::class);
+    Route::post('/usuarios',[\App\Http\Controllers\UserController::class,'usuarios']);
     Route::resource('/permiso',\App\Http\Controllers\PermisoController::class);
 });
+Route::get('/mail/{mail}',[\App\Http\Controllers\MailController::class,'show']);
+
