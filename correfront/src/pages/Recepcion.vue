@@ -44,7 +44,8 @@
           <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Fecha de correspondencia" v-model="dato.fecha" type="date" outlined/></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-select dense label="Folio" v-model="dato.folio" :options="folios" outlined /></div>
           <div class="col-sm-2 col-12 q-pa-xs"><q-input dense label="Cod externo" v-model="dato.codexterno" outlined /></div>
-          <div class="col-sm-2 col-12 q-pa-xs flex flex-center"><q-btn type="submit" color="primary" icon="add_circle" label="Registrar"/></div>
+          <div class="col-sm-2 col-12 q-pa-xs flex flex-center"><q-btn type="submit" color="primary" icon="add_circle" label="Registrar" v-if="dato.id==undefined || dato.id==''"/>
+          <q-btn type="submit" color="amber" icon="edit" label="Modificar" v-else /></div>
         </div>
       </q-form>
     </div>
@@ -102,7 +103,7 @@
             <q-btn-group >
               <q-btn type="a"  target="__blank" dense :href="url+'/mail/'+props.row.id" color="primary" label="Imprimir" icon="timeline" size="xs" />
 <!--              <q-btn dense@click= color="teal" label="Imprimir ticket" icon="visibility" size="xs" />-->
-              <q-btn dense @click="editar" color="teal" label="Editar" icon="edit" size="xs" />
+              <q-btn dense @click="editar(props)" color="teal" label="Editar" icon="edit" size="xs" />
               <q-btn dense @click="remitir" color="positive" label="Remitir" icon="code" size="xs" />
               <q-btn dense @click="anular" color="negative" label="Anular" icon="delete" size="xs" />
               <q-btn dense @click="archivar" color="accent" label="Archivar" icon="list" size="xs" />
@@ -173,6 +174,10 @@ export default {
     })
   },
   methods:{
+    editar(props){
+      console.log(props.row);
+      this.dato=props.row;
+    },
     // imprimir(){
     //   let cm=this;
     //   function header(fecha){
@@ -272,6 +277,7 @@ export default {
     guardar(){
       // console.log(this.remitente)
       // return false
+      if(this.dato.id==undefined || this.dato.id==''){
       this.$q.loading.show()
       this.$axios.post(process.env.API+'/mail',this.dato).then(res=>{
         // console.log(res.data)
@@ -284,7 +290,23 @@ export default {
           color:'red',
           icon:'error'
         })
-      })
+      })}
+      else{
+             this.$q.loading.show()
+      this.$axios.post(process.env.API+'/updatemail',this.dato).then(res=>{
+        this.dato={tipo:'INTERNO',fecha:date.formatDate(Date.now(),'YYYY-MM-DD'),folio:1};
+        // console.log(res.data)
+        this.misdatos()
+        // this.$q.loading.hide()
+      }).catch(err=>{
+        this.$q.loading.hide()
+        this.$q.notify({
+          message:err.response.data.message,
+          color:'red',
+          icon:'error'
+        })
+      }) 
+      }
     }
   }
 

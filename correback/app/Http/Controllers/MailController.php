@@ -67,7 +67,19 @@ class MailController extends Controller
 //        $mail->mail_id=$request->mail_id;
         $mail->save();
     }
-
+    public function updatemail(Request $request){
+        $mail=Mail::find($request->id);
+        $mail->tipo = $request->tipo;
+        $mail->ref = $request->ref;
+        $mail->fechacarta= $request->fechacarta;
+        $mail->folio= $request->folio;
+        $mail->remitente= $request->remitente;
+        $mail->cargo= $request->cargo;
+        $mail->institucion=$request->institucion;
+        $mail->codinterno=$request->codinterno;
+        $mail->save();
+        return $mail;
+    }
     /**
      * Display the specified resource.
      *
