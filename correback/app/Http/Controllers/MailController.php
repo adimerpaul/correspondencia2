@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Mail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+
 //use Barryvdh\DomPDF\Facade as PDF;
 
 class MailController extends Controller
@@ -18,7 +21,73 @@ class MailController extends Controller
     public function index(Request $request)
     {
 //        return Mail::where('unit_id',$request->user()->unit_id)->get();
-        return Mail::with('logs')->where('unit_id',$request->user()->unit_id)->get();
+        return Mail::with('logs')->where('unit_id',$request->user()->unit_id)->where('estado','EN PROCESO')->get();
+    }
+    public function buscar(Request $request)
+    {
+//        return Mail::where('unit_id',$request->user()->unit_id)->get();
+        return Mail::where('codigo',$request->codigo)->with('logs')->get();
+    }
+    public function micorre(Request $request)
+    {
+//        return Mail::where('unit_id',$request->user()->unit_id)->get();
+        return Mail::with('logs')->where('user_id',$request->user()->id)->where('estado','EN PROCESO')->get();
+    }
+
+    public function dividir(Request $request)
+    {
+        $mail=Mail::find($request->mail_id);
+        for ($i=1;$i<=$request->cantidad;$i++){
+            $m=new Mail();
+            $m->codigo=$mail->codigo.".".$i;
+            $m->tipo=$mail->tipo;
+            $m->tipo2="DIVISION";
+            $m->ref=$mail->ref;
+            $m->fecha=$mail->fecha;
+            $m->fechacarta=$mail->fechacarta;
+            $m->remitente=$mail->remitente;
+            $m->cargo=$mail->cargo;
+            $m->institucion=$mail->institucion;
+            $m->estado=$mail->estado;
+            $m->folio=$mail->folio;
+            $m->archivo=$mail->archivo;
+            $m->codinterno=$mail->codinterno;
+            $m->codexterno=$mail->codexterno.".".$i;
+            $m->user_id=$mail->user_id;
+            $m->unit_id=$mail->unit_id;
+            $m->mail_id=$mail->id;
+            $m->save();
+            $log=new Log();
+            $log->mail_id=$m->id;
+            $log->user_id=null;
+            $log->user_id2=$request->user()->id;
+            $log->remitente='';
+            $log->destinatario=$request->user()->name;
+//        $log->estado=$request->estado;
+            $log->fecha=date('Y-m-d');
+            $log->hora=date('H:i:s');
+            $log->unit_id=$request->user()->unit_id;
+            $log->save();
+        }
+//        return Mail::where('unit_id',$request->user()->unit_id)->get();
+//        return Mail::with('logs')->where('unit_id',$request->user()->unit_id)->where('estado','EN PROCESO')->get();
+    }
+
+    public function upload(Request $request){
+        $this->validate($request, [
+            'imagen'=>'required',
+            'mail_id'=>'required'
+        ]);
+        if ($request->hasFile('imagen')) {
+            $file=$request->file('imagen');
+            $nombreArchivo = time().".".$file->getClientOriginalExtension();
+            $file->move(\public_path('imagenes'), $nombreArchivo);
+            $mail=Mail::find($request->mail_id);
+            $mail->archivo=$nombreArchivo;
+            $mail->save();
+            return $nombreArchivo;
+        }
+
     }
 
     /**
@@ -39,23 +108,33 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        if (Mail::max("codinterno")==''){
+        if (Mail::where('unit_id',$request->user()->unit_id)->max("codinterno")==''){
             $codigointerno=1;
         }else{
-            $codigointerno=Mail::max("codinterno")+1;
+            $codigointerno=Mail::where('unit_id',$request->user()->unit_id)->max("codinterno")+1;
         }
-//        return Mail::max("codinterno")+1;
+//        return Mail::max("codinterno");
         $user=User::where('id',$request->user()->id)->with('unit')->get();
 //        return $user[0]->unit->codigo;
 //        return $request;
+        $query=Mail::where('remitente',strtoupper( $request->remitente));
+//        return  $query->count();
+        if ($query->count()>0){
+         DB::table('mails')->where('remitente',strtoupper( $request->remitente))->update([
+             'cargo'=>strtoupper($request->cargo),
+             'institucion'=>strtoupper($request->institucion),
+         ]);
+        }
+//        return 'a';
+
         $mail=new Mail();
         $mail->codigo=$user[0]->unit->codigo.str_pad($codigointerno, 4, '0', STR_PAD_LEFT);
         $mail->tipo=$request->tipo;
 //        $mail->tipo2=$request->tipo2;
-        $mail->remitente=$request->remitente;
-        $mail->cargo=$request->cargo;
-        $mail->institucion=$request->institucion;
-        $mail->ref=$request->ref;
+        $mail->remitente= strtoupper( $request->remitente);
+        $mail->cargo=strtoupper($request->cargo);
+        $mail->institucion=strtoupper($request->institucion);
+        $mail->ref=strtoupper($request->ref);
         $mail->fecha=date('Y-m-d');
         $mail->fechacarta=$request->fecha;
 //        $mail->estado=$request->estado;
@@ -63,10 +142,23 @@ class MailController extends Controller
 //        $mail->archivo=$request->archivo;
         $mail->codinterno=$codigointerno;
         $mail->codexterno=$request->codexterno;
-//        $mail->user_id=$request->user()->id;
-//        $mail->unit_id=$request->user()->unit_id;
+        $mail->user_id=$request->user()->id;
+        $mail->unit_id=$request->user()->unit_id;
 //        $mail->mail_id=$request->mail_id;
         $mail->save();
+        $log=new Log();
+        $log->mail_id=$mail->id;
+        $log->user_id=null;
+        $log->user_id2=$request->user()->id;
+        $log->remitente='';
+        $log->destinatario=$request->user()->name;
+//        $log->estado=$request->estado;
+        $log->fecha=date('Y-m-d');
+        $log->hora=date('H:i:s');
+        $log->unit_id=$request->user()->unit_id;
+        $log->save();
+
+        return $mail;
     }
     public function updatemail(Request $request){
         $mail=Mail::find($request->id);
@@ -239,11 +331,23 @@ font-size: 14px;
 
     }
 
-    public function eliminar($id)
-    {
-        $mail=Mail::find($request->id);
+    public function anulado(Request $request){
+        $mail=Mail::find($request->mail_id);
         $mail->estado='ANULADO';
-        return $mail->save();
+        $mail->save();
+
+        $log=new Log();
+        $log->mail_id=$request->mail_id;
+        $log->user_id=null;
+        $log->user_id2=$request->user()->id;
+        $log->remitente='';
+        $log->accion=$request->accion;
+        $log->destinatario=$request->user()->name;
+        $log->estado='ANULADO';
+        $log->fecha=date('Y-m-d');
+        $log->hora=date('H:i:s');
+        $log->unit_id=$request->user()->unit_id;
+        $log->save();
 
     }
 
@@ -251,7 +355,7 @@ font-size: 14px;
     {
         $mail=Mail::find($request->id);
         $mail->estado='ARCHIVADO';
-        return $mail->save();
+        $mail->save();
 
     }
 }

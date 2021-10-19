@@ -17,9 +17,9 @@ class CreateLogsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mail_id')->nullable()->default(null);
             $table->foreign('mail_id')->references('id')->on('mails');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable()->default(null);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('user_id2');
+            $table->unsignedBigInteger('user_id2')->nullable()->default(null);
             $table->foreign('user_id2')->references('id')->on('users');
             $table->string('remitente')->nullable()->default('');
             $table->string('destinatario')->nullable()->default('');
