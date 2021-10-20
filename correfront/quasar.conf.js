@@ -73,7 +73,7 @@ module.exports = configure(function (ctx) {
       env: {
         API: ctx.dev
           ? 'http://localhost:8000/api'
-          : 'https://prod.api.com'
+          : 'https://back.gamo.cf/api'
       }
     },
 
