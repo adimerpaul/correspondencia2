@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PermisoSeeder::class,
             PermisoUserSeeder::class,
-            MailSeeder::class,
-            LogSeeder::class,
+//            MailSeeder::class,
+//            LogSeeder::class,
         ]);
     }
 }

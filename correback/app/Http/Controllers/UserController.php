@@ -41,7 +41,7 @@ class UserController extends Controller
         $user->unit_id=$request->unit_id;
         $user->fechalimite=date('Y-m-d', strtotime(now(). ' + 7 days'));;
         $user->save();
-        $permiso = Permiso::find([2,3]);
+        $permiso = Permiso::find([3]);
         $user->permisos()->attach($permiso);
         $token=$user->createToken('auth_token')->plainTextToken;
         return response()->json(['token'=>$token,'user'=>User::where('id',$user->id)->with('permisos')->with('unit')->firstOrFail()],200);;
