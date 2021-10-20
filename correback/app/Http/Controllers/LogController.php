@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
-use App\Models\Mail;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -36,23 +35,7 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-//        return $request;
-        $log= new Log();
-        $log->mail_id=$request->mail_id;
-        $log->user_id=$request->user()->id;
-        $log->user_id2=$request->user_id2;
-        $log->remitente=$request->user()->name;
-        $log->destinatario=$request->destinatario;
-        $log->accion=$request->accion;
-        $log->estado='EN PROCESO';
-        $log->fecha=date('Y-m-d');
-        $log->hora=date('H:i:s');
-        $log->unit_id=$request->unit_id;
-        $log->save();
-        $mail=Mail::find($request->mail_id);
-        $mail->unit_id=$request->unit_id;
-        $mail->user_id=$request->user_id2;
-        $mail->save();
+        //
     }
 
     /**

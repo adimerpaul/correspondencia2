@@ -16,10 +16,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            ['name'=>'ADMINISTRADOR','carnet'=>'1111','email'=>'admin@test.com','password'=>Hash::make('admin'),'fechalimite'=>'9999/01/01','unit_id'=>16],
-            ['name'=>'ADIMER PAUL CHAMBI AJATA','carnet'=>'1010','email'=>'a@gmail.com','password'=>Hash::make('1010'),'fechalimite'=>'9999/01/01','unit_id'=>1],
-            ['name'=>'ALEJANDRO LOPEZ','carnet'=>'2020','email'=>'b@gmail.com','password'=>Hash::make('2020'),'fechalimite'=>'9999/01/01','unit_id'=>2],
-            ['name'=>'GERMAN','carnet'=>'3030','email'=>'c@gmail.com','password'=>Hash::make('3030'),'fechalimite'=>'9999/01/01','unit_id'=>3],
+            ['name'=>'ADMINISTRADOR','carnet'=>'1010','email'=>'admin@test.com','password'=>Hash::make('admin'),'fechalimite'=>'9999/01/01','unit_id'=>16],
+            ['name'=>'ADIMER PAUL CHAMBI AJATA','carnet'=>'7336199','email'=>'adimer101@gmail.com','password'=>Hash::make('7336199'),'fechalimite'=>'9999/01/01','unit_id'=>1],
+            ['name'=>'ALEJANDRO LOPEZ','carnet'=>'2020','email'=>'aler@gmail.com','password'=>Hash::make('2020'),'fechalimite'=>'9999/01/01','unit_id'=>2],
         ]);
     }
 }

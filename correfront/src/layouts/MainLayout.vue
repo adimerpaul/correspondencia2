@@ -90,7 +90,7 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>Asignaciones unidad</q-item-label>
+              <q-item-label>Recepcion de archivos</q-item-label>
               <q-item-label caption>
                 Recepciones por unidad
               </q-item-label>

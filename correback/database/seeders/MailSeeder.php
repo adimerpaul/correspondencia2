@@ -27,7 +27,7 @@ class MailSeeder extends Seeder
             "codinterno"=>"1",
             "codexterno"=>"CAT0001",
             'user_id'=>"2",
-            'unit_id'=>"1",
+            'unit_id'=>"16",
         ]);
     }
 }

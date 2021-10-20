@@ -24,7 +24,7 @@ class LogSeeder extends Seeder
             'accion'=>"",
             'fecha'=>"2021-01-01",
             'hora'=>"12:00",
-            'unit_id'=>"1",
+            'unit_id'=>"16",
 
         ]);
     }

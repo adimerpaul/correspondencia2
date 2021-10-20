@@ -18,7 +18,7 @@ class AsignacionController extends Controller
 //        return Mail::with(['logs'=>function( $query) use ($request){
 //            return $query->where('user_id2',$request->user()->id)->where('estado','EN PROCESO');
 //        }])->get();
-        return Mail::with('logs')->where('estado','EN PROCESO')->where('user_id',$request->user()->id)->get();
+        return Mail::with('logs')->where('user_id',$request->user()->id)->get();
     }
 
     /**

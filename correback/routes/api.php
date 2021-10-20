@@ -28,17 +28,12 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
 
     Route::resource('/user',\App\Http\Controllers\UserController::class);
     Route::resource('/mail',\App\Http\Controllers\MailController::class);
-    Route::resource('/log',\App\Http\Controllers\LogController::class);
     Route::resource('/asignacion',\App\Http\Controllers\AsignacionController::class);
     Route::post('/updatemail',[\App\Http\Controllers\MailController::class,'updatemail']);
-    Route::post('/micorre',[\App\Http\Controllers\MailController::class,'micorre']);
-    Route::post('/buscar',[\App\Http\Controllers\MailController::class,'buscar']);
-    Route::post('/dividir',[\App\Http\Controllers\MailController::class,'dividir']);
-    Route::post('/anulado',[\App\Http\Controllers\MailController::class,'anulado']);
+    Route::post('/eliminar/{id}',[\App\Http\Controllers\MailController::class,'eliminar']);
     Route::post('/archivar',[\App\Http\Controllers\MailController::class,'archivar']);
     Route::post('/usuarios',[\App\Http\Controllers\UserController::class,'usuarios']);
     Route::resource('/permiso',\App\Http\Controllers\PermisoController::class);
-    Route::post('/upload',[\App\Http\Controllers\MailController::class,'upload']);
 });
 Route::get('/mail/{mail}',[\App\Http\Controllers\MailController::class,'show']);
 
